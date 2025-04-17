@@ -1,0 +1,15 @@
+
+# Ignorar la carpeta interna de Git
+
+.git/
+cat > .gitignore << EOF
+
+# Ignorar la carpeta interna de Git
+
+.git/
+
+
+:wq
+wq:
+:q
+it rm -r --cached 
