@@ -16,7 +16,7 @@ public class Client {
 
     public void startClient() throws RemoteException, NotBoundException {
         // Conectar al registro RMI en el puerto 1099
-        Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+        Registry registry = LocateRegistry.getRegistry("localhost", 1066);
         server = (InterfazDeServer) registry.lookup("server");  // Buscar el objeto remoto
     }
 

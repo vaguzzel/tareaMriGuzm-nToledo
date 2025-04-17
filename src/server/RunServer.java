@@ -12,7 +12,7 @@ public class RunServer {
     public static void main(String[] args) throws RemoteException, AlreadyBoundException {
         // TODO Auto-generated method stub
         InterfazDeServer server = new ServerImpl();
-        Registry registry = LocateRegistry.createRegistry(1095);
+        Registry registry = LocateRegistry.createRegistry(1066);
         registry.bind("server", server);
 
         System.out.println("Servidor arribal!");
