@@ -15,17 +15,21 @@ public class Client {
     public Client() {}
 
     public void startClient() throws RemoteException, NotBoundException {
+        // Conectar al registro RMI en el puerto 1099
         Registry registry = LocateRegistry.getRegistry("localhost", 1099);
-        server = (InterfazDeServer) registry.lookup("server");
+        server = (InterfazDeServer) registry.lookup("server");  // Buscar el objeto remoto
     }
+
     public void mostrarPersonas() throws RemoteException {
+        // Mostrar todas las personas en el servidor
         ArrayList<Persona> personas = server.getPersona();
         for (Persona persona : personas) {
             System.out.println(persona.getNombre() + " " + persona.getEdad());
         }
     }
 
-    public void crearPersona() throws RemoteException {
-        server.crearPersona();
+    public void crearPersona(String nombre, int edad) throws RemoteException {
+        // Crear una nueva persona en el servidor
+        server.agregarPersona(nombre, edad);
     }
 }
