@@ -15,9 +15,6 @@ public class ServerImpl extends UnicastRemoteObject implements InterfazDeServer 
     public ServerImpl() throws RemoteException {
         super();
         personas = new ArrayList<>();
-        // Inicializando con valores de prueba
-        personas.add(new Persona("Valentina Guzmán E", 22));
-        personas.add(new Persona("Claudio Toledo M", 21));
     }
 
     @Override
