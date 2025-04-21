@@ -8,6 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 public class ServerImpl extends UnicastRemoteObject implements InterfazDeServer {
+	private static final long serialVersionUID = 1L; //controlar compatibilidad de versiones
     // lista de personas en el servidor
     private ArrayList<Persona> personas;
 
@@ -32,5 +33,12 @@ public class ServerImpl extends UnicastRemoteObject implements InterfazDeServer 
     public void agregarPersona(String nombre, int edad) throws RemoteException {
         Persona nuevaPersona = new Persona(nombre, edad);
         personas.add(nuevaPersona);
+    }
+    
+    @Override
+    public void limpiarPersonas() throws RemoteException {
+        // limpia toda la lista (incluyendo los datos con los que se había inicializado)
+        personas.clear();
+        System.out.println("Servidor: Lista de personas limpiada.");
     }
 }

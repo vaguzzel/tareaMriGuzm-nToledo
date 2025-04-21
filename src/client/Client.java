@@ -40,4 +40,9 @@ public class Client {
         // para crear una nueva persona en el servidor
         server.agregarPersona(nombre, edad);
     }
+    
+    public void limpiarPersonas() throws RemoteException {
+        // llama al método del servidor para limpiar la lista
+        server.limpiarPersonas();
+    }
 }

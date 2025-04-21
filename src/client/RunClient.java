@@ -80,6 +80,14 @@ public class RunClient {
                         }
                         break;
                     case 0:
+                        try {
+                            // Llamar al método para limpiar todas las personas
+                            client.limpiarPersonas();
+                            System.out.println("Lista de personas limpiada exitosamente.");
+                        } catch (RemoteException e) {
+                            System.err.println("Error al limpiar la lista de personas: " + e.getMessage());
+                        }
+                        
                         salir = true; 
                         System.out.println("Desconectando cliente...");
                         break;
