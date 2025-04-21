@@ -6,44 +6,44 @@ import java.util.InputMismatchException; // Importar para manejo de errores de e
 import java.util.Scanner;
 
 public class RunClient {
-    public static void main(String[] args) { // No necesita lanzar excepciones aquí si las manejamos dentro
+    public static void main(String[] args) { 
         Client client = new Client();
-        Scanner scanner = new Scanner(System.in); // Crear el Scanner una vez
+        Scanner scanner = new Scanner(System.in); 
         boolean salir = false;
 
         try {
-            client.startClient(); // Conectar al servidor una vez al inicio
+            client.startClient(); // conectar al servidor
             System.out.println("Cliente conectado al servidor.");
 
             while (!salir) {
-                // Mostrar menú de opciones
+                // mostrar menú de opciones
                 System.out.println("\n--- Menú Cliente RMI ---");
                 System.out.println("1. Mostrar lista de personas");
                 System.out.println("2. Agregar nueva persona");
                 System.out.println("0. Salir");
                 System.out.print("Seleccione una opción: ");
 
-                int opcion = -1; // Inicializar opción
+                int opcion = -1; // inicializa opción
                 try {
-                    opcion = scanner.nextInt(); // Leer la opción del usuario
-                    scanner.nextLine(); // Consumir el salto de línea pendiente después de nextInt()
+                    opcion = scanner.nextInt(); // lee la opción que ingresa el usuario
+                    scanner.nextLine(); // consumir el salto de línea pendiente después de nextInt()
                 } catch (InputMismatchException e) {
                     System.out.println("Error: Por favor, ingrese un número válido.");
-                    scanner.nextLine(); // Consumir la entrada inválida
-                    continue; // Volver al inicio del bucle while
+                    scanner.nextLine(); // consumir la entrada inválida
+                    continue; 
                 }
 
 
-                // Procesar la opción seleccionada
+                // casos según lo ingresado en menú de opciones
                 switch (opcion) {
                     case 1:
                         System.out.println("\n--- Lista de Personas ---");
                         try {
-                             // Llamar al método para mostrar, asegurándose de que maneje la lista vacía
+                             // llamar al método para mostrarPersonas, también maneja lista vacía 
                              client.mostrarPersonas();
                         } catch (RemoteException e) {
                             System.err.println("Error al obtener la lista del servidor: " + e.getMessage());
-                            // Opcionalmente, intentar reconectar o salir
+                           
                         }
                         break;
                     case 2:
@@ -56,31 +56,31 @@ public class RunClient {
                             int edad = -1;
                             try {
                                 edad = scanner.nextInt();
-                                scanner.nextLine(); // Consumir salto de línea
-                                if (edad < 0) { // Validación simple de edad
+                                scanner.nextLine(); // consume salto de línea
+                                if (edad < 0) { // valida la edad 
                                      System.out.println("Edad inválida, no se agregará la persona.");
                                      continue;
                                 }
                             } catch (InputMismatchException e) {
                                 System.out.println("Error: La edad debe ser un número entero.");
-                                scanner.nextLine(); // Consumir entrada inválida
-                                continue; // Volver al menú
+                                scanner.nextLine(); // consume entrada inválida
+                                continue; // vuelve al menú
                             }
 
 
-                            client.crearPersona(nombre, edad); // Crear persona en el servidor
+                            client.crearPersona(nombre, edad); // crea persona en el servidor
                             System.out.println("Persona agregada exitosamente.");
 
                         } catch (RemoteException e) {
                             System.err.println("Error al agregar persona en el servidor: " + e.getMessage());
-                        } catch (Exception e) { // Captura otras posibles excepciones de entrada
+                        } catch (Exception e) { // maneja excepciones de entrada
                              System.err.println("Error en la entrada de datos: " + e.getMessage());
-                             // Asegurarse de limpiar el buffer del scanner si es necesario
+                             // si es necesario limpia el buffer
                              if (scanner.hasNextLine()) scanner.nextLine();
                         }
                         break;
                     case 0:
-                        salir = true; // Establecer la bandera para salir del bucle
+                        salir = true; 
                         System.out.println("Desconectando cliente...");
                         break;
                     default:
@@ -91,9 +91,9 @@ public class RunClient {
 
         } catch (RemoteException | NotBoundException e) {
             System.err.println("Error crítico de conexión con el servidor: " + e.getMessage());
-            // e.printStackTrace(); // Descomentar para depuración
+         
         } finally {
-             scanner.close(); // Cerrar el Scanner al final
+             scanner.close(); // cerrar el Scanner al final
              System.out.println("Cliente terminado.");
         }
     }

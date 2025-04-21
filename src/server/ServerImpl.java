@@ -8,14 +8,14 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 public class ServerImpl extends UnicastRemoteObject implements InterfazDeServer {
-    // Lista de personas en el servidor
+    // lista de personas en el servidor
     private ArrayList<Persona> personas;
 
-    // Constructor
+    // constructor
     public ServerImpl() throws RemoteException {
         super();
         personas = new ArrayList<>();
-        // (Datos iniciales)
+        // Datos iniciales (las personas se mostrarán al ocupar la opción dos del menú en la consola)
         System.out.println("Inicializando con datos de prueba...");
         personas.add(new Persona("Valentina Guzmán E", 22));
         personas.add(new Persona("Claudio Toledo M", 21));
